@@ -33,7 +33,7 @@ function App() {
     if (gameOver) {
       timer = setTimeout(() => {
         setOpenModalWin(true);
-      }, 15000);
+      }, 1500);
     }
 
     return () => {
@@ -98,6 +98,7 @@ function App() {
       i++;
     }
     if (count >= 5) {
+      console.log(winCell);
       return true;
     } else {
       setWinCell([]);
@@ -105,10 +106,10 @@ function App() {
 
     // Kiểm tra hàng dọc
     setWinCell((prev) => [...prev, Number(String(row) + String(col))]);
-    count = 1;
-    i = 1;
     let incr1 = 1;
     let decr1 = 1;
+    count = 1;
+    i = 1;
     while (row - i >= 0 && board[row - i][col] === player) {
       setWinCell((prev) => [
         ...prev,
@@ -129,10 +130,12 @@ function App() {
       i++;
     }
     if (count >= 5) {
+      console.log(winCell);
       return true;
     } else {
       setWinCell([]);
     }
+
     // Kiểm tra đường chéo chính
     count = 1;
     i = 1;
