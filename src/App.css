@@ -1,0 +1,137 @@
+.App {
+  text-align: center;
+  margin-top: 50px;
+}
+
+h1 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #333;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 48px;
+  font-size: 1.6rem;
+}
+
+.status {
+  margin-top: 30px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-list {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.reset-btn {
+  margin-top: 50px;
+}
+.player {
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.player-turn {
+  font-size: 1.4rem;
+}
+.mouse-over {
+  background-color: #ccc;
+}
+
+.win-elm {
+  background-color: yellow;
+}
+
+/* Ant design config css */
+.ant-modal {
+  width: 50% !important;
+}
+.ant-modal-content {
+  padding: 100px 30px !important;
+}
+.ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.ant-modal-close,
+.ant-modal-footer {
+  display: none !important;
+}
+.ant-modal-title {
+  font-size: 2.4rem !important;
+  text-align: center !important;
+}
+.ant-modal-body h2 {
+  text-align: center;
+}
+.ant-btn {
+  width: 200px;
+  height: 70px;
+  font-size: 2rem;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  /* Kiểu cho thiết bị di động */
+  .App {
+    margin-top: 0px;
+  }
+  .ant-modal {
+    width: 90% !important;
+  }
+  .ant-modal-content {
+    padding: 50px 20px !important;
+  }
+  .ant-modal-title {
+    font-size: 1.4rem !important;
+  }
+  .ant-modal-body h2 {
+    font-size: 0.8rem;
+  }
+  .btn-list {
+    gap: 10px;
+  }
+  .ant-btn {
+    width: 150px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
+  .row {
+    max-width: 100%;
+  }
+  h1 {
+    margin-top: 0;
+  }
+  .player-turn {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+}
