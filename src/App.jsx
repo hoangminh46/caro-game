@@ -8,6 +8,7 @@ function App() {
   const [openModalWin, setOpenModalWin] = useState(false);
   const [boardSize, setBoardSize] = useState(0);
   const [winCell, setWinCell] = useState([]);
+  const [draw, setDraw] = useState(false);
 
   console.log(winCell);
 
@@ -29,7 +30,6 @@ function App() {
 
   useEffect(() => {
     let timer;
-
     if (gameOver) {
       timer = setTimeout(() => {
         setOpenModalWin(true);
@@ -39,7 +39,7 @@ function App() {
     return () => {
       clearTimeout(timer);
     };
-  }, [gameOver]);
+  }, [gameOver, draw]);
 
   // Render broad khi player chọn size Caro
   useEffect(() => {
@@ -61,7 +61,7 @@ function App() {
       if (checkWin(row, col)) {
         setGameOver(true);
       } else if (checkDraw(newBoard)) {
-        console.log("Trò chơi hòa!");
+        setDraw(true);
         setGameOver(true);
       } else {
         setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
@@ -137,9 +137,17 @@ function App() {
     }
 
     // Kiểm tra đường chéo chính
+    setWinCell((prev) => [...prev, Number(String(row) + String(col))]);
+    let incr2 = 1;
+    let decr2 = 1;
     count = 1;
     i = 1;
     while (row - i >= 0 && col - i >= 0 && board[row - i][col - i] === player) {
+      setWinCell((prev) => [
+        ...prev,
+        Number(String(row - incr2++) + String(col - incr2 + 1)),
+      ]);
+      --incr2;
       count++;
       i++;
     }
@@ -149,14 +157,24 @@ function App() {
       col + i < boardSize &&
       board[row + i][col + i] === player
     ) {
+      setWinCell((prev) => [
+        ...prev,
+        Number(String(row + decr2++) + String(col + decr2 - 1)),
+      ]);
+      --decr2;
       count++;
       i++;
     }
     if (count >= 5) {
       return true;
+    } else {
+      setWinCell([]);
     }
 
     // Kiểm tra đường chéo phụ
+    setWinCell((prev) => [...prev, Number(String(row) + String(col))]);
+    let incr3 = 1;
+    let decr3 = 1;
     count = 1;
     i = 1;
     while (
@@ -164,6 +182,11 @@ function App() {
       col + i < boardSize &&
       board[row - i][col + i] === player
     ) {
+      setWinCell((prev) => [
+        ...prev,
+        Number(String(row - incr3++) + String(col + incr3 - 1)),
+      ]);
+      --incr3;
       count++;
       i++;
     }
@@ -173,11 +196,18 @@ function App() {
       col - i >= 0 &&
       board[row + i][col - i] === player
     ) {
+      setWinCell((prev) => [
+        ...prev,
+        Number(String(row + decr3++) + String(col - decr3 + 1)),
+      ]);
+      --decr3;
       count++;
       i++;
     }
     if (count >= 5) {
       return true;
+    } else {
+      setWinCell([]);
     }
 
     return false;
@@ -210,6 +240,7 @@ function App() {
     setBoardSize(0);
     setWinCell([]);
     setOpenModalWin(false);
+    setDraw(false);
   };
 
   return (
@@ -274,7 +305,11 @@ function App() {
       </Modal>
 
       <Modal
-        title={`Người chơi ${currentPlayer === 1 ? 1 : 2} thắng 👑👑👑`}
+        title={
+          draw
+            ? "Kết quả hoà 🤝🤝🤝 "
+            : `Người chơi ${currentPlayer === 1 ? 1 : 2} thắng 👑👑👑`
+        }
         open={openModalWin}
       >
         <div className="btn-list">
