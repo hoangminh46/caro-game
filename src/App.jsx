@@ -33,7 +33,7 @@ function App() {
     if (gameOver) {
       timer = setTimeout(() => {
         setOpenModalWin(true);
-      }, 2000);
+      }, 15000);
     }
 
     return () => {
@@ -76,27 +76,28 @@ function App() {
     // Kiểm tra hàng ngang
     let count = 1;
     let i = 1;
-    let decr1 = 1;
-    let incr1 = 1;
+    let incr = 1;
+    let decr = 1;
     while (col - i >= 0 && board[row][col - i] === player) {
-      count++;
-      i++;
       setWinCell((prev) => [
         ...prev,
-        Number(String(row) + String(col - decr1++)),
+        Number(String(row) + String(col - incr++)),
       ]);
+      --incr;
+      count++;
+      i++;
     }
     i = 1;
     while (col + i < boardSize && board[row][col + i] === player) {
-      count++;
-      i++;
       setWinCell((prev) => [
         ...prev,
-        Number(String(row) + String(col + incr1++)),
+        Number(String(row) + String(col + decr++)),
       ]);
+      --decr;
+      count++;
+      i++;
     }
     if (count >= 5) {
-      console.log(winCell);
       return true;
     } else {
       setWinCell([]);
@@ -106,32 +107,32 @@ function App() {
     setWinCell((prev) => [...prev, Number(String(row) + String(col))]);
     count = 1;
     i = 1;
-    let decr2 = 1;
-    let incr2 = 1;
+    let incr1 = 1;
+    let decr1 = 1;
     while (row - i >= 0 && board[row - i][col] === player) {
-      count++;
-      i++;
       setWinCell((prev) => [
         ...prev,
-        Number(String(row - decr2++) + String(col)),
+        Number(String(row - incr1++) + String(col)),
       ]);
+      --incr1;
+      count++;
+      i++;
     }
     i = 1;
     while (row + i < boardSize && board[row + i][col] === player) {
-      count++;
-      i++;
       setWinCell((prev) => [
         ...prev,
-        Number(String(row + incr2++) + String(col)),
+        Number(String(row + decr1++) + String(col)),
       ]);
+      --decr1;
+      count++;
+      i++;
     }
     if (count >= 5) {
-      console.log(winCell);
       return true;
     } else {
       setWinCell([]);
     }
-
     // Kiểm tra đường chéo chính
     count = 1;
     i = 1;
@@ -246,6 +247,7 @@ function App() {
           </div>
         ))}
       </div>
+      {console.log(winCell)}
 
       <div className="status">
         {!gameOver && !openModal && (
