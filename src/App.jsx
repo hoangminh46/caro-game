@@ -78,23 +78,31 @@ function App() {
     let i = 1;
     let incr = 1;
     let decr = 1;
-    while (col - i >= 0 && board[row][col - i] === player) {
-      setWinCell((prev) => [
-        ...prev,
-        Number(String(row) + String(col - incr++)),
-      ]);
+    while (col - i >= 0 && board[row][col - i] !== 0) {
+      if (board[row][col - i] === player) {
+        setWinCell((prev) => [
+          ...prev,
+          Number(String(row) + String(col - incr++)),
+        ]);
+        count++;
+      } else {
+        count--;
+      }
       --incr;
-      count++;
       i++;
     }
     i = 1;
-    while (col + i < boardSize && board[row][col + i] === player) {
-      setWinCell((prev) => [
-        ...prev,
-        Number(String(row) + String(col + decr++)),
-      ]);
+    while (col + i < boardSize && board[row][col + i] !== 0) {
+      if (board[row][col + i] === player) {
+        setWinCell((prev) => [
+          ...prev,
+          Number(String(row) + String(col + decr++)),
+        ]);
+        count++;
+      } else {
+        count--;
+      }
       --decr;
-      count++;
       i++;
     }
     if (count >= 5) {
@@ -110,23 +118,31 @@ function App() {
     let decr1 = 1;
     count = 1;
     i = 1;
-    while (row - i >= 0 && board[row - i][col] === player) {
-      setWinCell((prev) => [
-        ...prev,
-        Number(String(row - incr1++) + String(col)),
-      ]);
+    while (row - i >= 0 && board[row - i][col] !== 0) {
+      if (board[row - i][col] === player) {
+        setWinCell((prev) => [
+          ...prev,
+          Number(String(row - incr1++) + String(col)),
+        ]);
+        count++;
+      } else {
+        count--;
+      }
       --incr1;
-      count++;
       i++;
     }
     i = 1;
-    while (row + i < boardSize && board[row + i][col] === player) {
-      setWinCell((prev) => [
-        ...prev,
-        Number(String(row + decr1++) + String(col)),
-      ]);
+    while (row + i < boardSize && board[row + i][col] !== 0) {
+      if (board[row + i][col] === player) {
+        setWinCell((prev) => [
+          ...prev,
+          Number(String(row + decr1++) + String(col)),
+        ]);
+        count++;
+      } else {
+        count--;
+      }
       --decr1;
-      count++;
       i++;
     }
     if (count >= 5) {
@@ -142,27 +158,35 @@ function App() {
     let decr2 = 1;
     count = 1;
     i = 1;
-    while (row - i >= 0 && col - i >= 0 && board[row - i][col - i] === player) {
-      setWinCell((prev) => [
-        ...prev,
-        Number(String(row - incr2++) + String(col - incr2 + 1)),
-      ]);
+    while (row - i >= 0 && col - i >= 0 && board[row - i][col - i] !== 0) {
+      if (board[row - i][col - i] === player) {
+        setWinCell((prev) => [
+          ...prev,
+          Number(String(row - incr2++) + String(col - incr2 + 1)),
+        ]);
+        count++;
+      } else {
+        count--;
+      }
       --incr2;
-      count++;
       i++;
     }
     i = 1;
     while (
       row + i < boardSize &&
       col + i < boardSize &&
-      board[row + i][col + i] === player
+      board[row + i][col + i] !== 0
     ) {
-      setWinCell((prev) => [
-        ...prev,
-        Number(String(row + decr2++) + String(col + decr2 - 1)),
-      ]);
+      if (board[row + i][col + i] === player) {
+        setWinCell((prev) => [
+          ...prev,
+          Number(String(row + decr2++) + String(col + decr2 - 1)),
+        ]);
+        count++;
+      } else {
+        count--;
+      }
       --decr2;
-      count++;
       i++;
     }
     if (count >= 5) {
@@ -180,28 +204,36 @@ function App() {
     while (
       row - i >= 0 &&
       col + i < boardSize &&
-      board[row - i][col + i] === player
+      board[row - i][col + i] !== 0
     ) {
-      setWinCell((prev) => [
-        ...prev,
-        Number(String(row - incr3++) + String(col + incr3 - 1)),
-      ]);
+      if (board[row - i][col + i] === player) {
+        setWinCell((prev) => [
+          ...prev,
+          Number(String(row - incr3++) + String(col + incr3 - 1)),
+        ]);
+        count++;
+      } else {
+        count--;
+      }
       --incr3;
-      count++;
       i++;
     }
     i = 1;
     while (
       row + i < boardSize &&
       col - i >= 0 &&
-      board[row + i][col - i] === player
+      board[row + i][col - i] !== 0
     ) {
-      setWinCell((prev) => [
-        ...prev,
-        Number(String(row + decr3++) + String(col - decr3 + 1)),
-      ]);
+      if (board[row + i][col - i] === player) {
+        setWinCell((prev) => [
+          ...prev,
+          Number(String(row + decr3++) + String(col - decr3 + 1)),
+        ]);
+        count++;
+      } else {
+        count--;
+      }
       --decr3;
-      count++;
       i++;
     }
     if (count >= 5) {
